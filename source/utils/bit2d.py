@@ -5,8 +5,8 @@ class BinaryIndexedTree2D():
     def __init__(self, n, m):
         self.n = n
         self.m = m
-        self.a = np.zeros(shape=(n+1,m+1))
-        self.bit = np.zeros(shape=(n+1,m+1))
+        self.a = np.zeros(shape=(n+1,m+1), dtype=int)
+        self.bit = np.zeros(shape=(n+1,m+1), dtype=int)
 
     def set_value(self, i, j, value):
         self.inc(i, j, value - self.a[i + 1][j + 1])
