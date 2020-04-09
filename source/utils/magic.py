@@ -25,10 +25,29 @@ class MagicSquare():
                 self.bit.set_value(i, j, matrix[i][j])
 
     def violation_number(self):
-        if (self.bit is None):
+        if self.bit is None:
             return None
-        # TODO
-        return 0
+
+        total_num = 0
+        diag_1_sum = 0
+        diag_2_sum = 0
+        for i in range(self.n):
+            sum = self.bit.get_rect(i, 0, i, self.n - 1)
+            if sum != self.sum:
+                total_num += 1
+
+            sum = self.bit.get_rect(0, i, self.n - 1, i)
+            if sum != self.sum:
+                total_num += 1
+            
+            diag_1_sum += self.bit['matrix'][i, i]
+            diag_2_sum += self.bit['matrix'][i, self.n - i - 1]
+
+        if diag_1_sum != self.sum:
+            total_num += 1
+        if diag_2_sum != self.sum:
+            total_num += 1
+        return total_num
 
     def get_successors(self, succ_num):
         # TODO
