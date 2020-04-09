@@ -8,6 +8,7 @@ class MagicSquare():
         self.n = n
         self.bit = BinaryIndexedTree2D(n, n)
         self.sum = int(n * (n**2 + 1) / 2)
+        self.init_random()
 
     def init_random(self):
         rm = np.random.permutation(self.n * self.n).reshape((self.n, self.n))
