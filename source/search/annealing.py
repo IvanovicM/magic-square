@@ -6,5 +6,5 @@ class SimulatedAnnealing(Searcher):
         super(SimulatedAnnealing, self).__init__(magic_square)
         self.type = 'Simulated Annealing'
 
-    def find(self):
+    def find(self, iterations):
         pass

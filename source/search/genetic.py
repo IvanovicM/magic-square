@@ -6,5 +6,5 @@ class GeneticAlgorithm(Searcher):
         super(GeneticAlgorithm, self).__init__(magic_square)
         self.type = 'Genetic Algorithm'
 
-    def find(self):
+    def find(self, iterations):
         pass

@@ -16,6 +16,14 @@ class MagicSquare():
             for j in range(self.n):
                 self.bit.set_value(i, j, rm[i][j] + 1)
 
+    def set_value(self, i, j, value):
+        self.bit.set_value(i, j, value)
+
+    def set_matrix(self, matrix):
+        for i in range(self.n):
+            for j in range(self.n):
+                self.bit.set_value(i, j, matrix[i][j])
+
     def violation_number(self):
         if (self.bit is None):
             return None

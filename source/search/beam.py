@@ -6,5 +6,5 @@ class LocalBeamSearch(Searcher):
         super(LocalBeamSearch, self).__init__(magic_square)
         self.type = 'Local Beam Search'
 
-    def find(self):
+    def find(self, iterations):
         pass

@@ -6,5 +6,5 @@ class GreedySearch(Searcher):
         super(GreedySearch, self).__init__(magic_square)
         self.type = 'Greedy Search'
 
-    def find(self):
+    def find(self, iterations):
         pass
