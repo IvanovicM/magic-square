@@ -9,6 +9,7 @@ class Searcher():
         self.sol = None
         self.violation_number = None
         self.iter = None
+        self.all_violations = None
 
     def find(self, iterations):
         pass
@@ -29,14 +30,17 @@ class Searcher():
         self.sol = self.magic_square['matrix']
         self.violation_number = self.magic_square.violation_number()
         self.iter = iterations
+        self.all_violations = [self.violation_number]
 
     def __getitem__(self, key):
         if key == 'sol':
             return self.sol
-        if key == 'viol_num':
+        if key == 'viol num':
             return self.violation_number
         if key == 'type':
             return self.type
         if key == 'iter':
             return self.iter
+        if key == 'viol. through iter.':
+            return self.all_violations
         return None

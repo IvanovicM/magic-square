@@ -16,4 +16,6 @@ class RandomSearch(Searcher):
             if new_violation_number < self.violation_number:
                 self.sol = self.magic_square['matrix']
                 self.violation_number = new_violation_number
+                self.all_violations.append(new_violation_number)
+
         
