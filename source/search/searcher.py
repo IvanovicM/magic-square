@@ -8,6 +8,7 @@ class Searcher():
         self.magic_square = magic_square
         self.sol = None
         self.violation_number = None
+        self.max_violation_number = (self.magic_square['n'] + 1) * 2
         self.iter = None
         self.all_violations = None
 
@@ -20,9 +21,10 @@ class Searcher():
         print('============================================================\n'
               'Search type: {}\n'
               'iterations: {}\n'
-              'violation number: {}\n'
+              'violation number: {} of {}\n'
               'solution: \n{}'.format(
-                    self.type, self.iter, self.violation_number, self.sol
+                    self.type, self.iter, self.violation_number,
+                    self.max_violation_number, self.sol
         ))
 
     def _init_start_state(self, iterations):

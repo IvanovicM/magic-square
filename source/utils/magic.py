@@ -50,6 +50,9 @@ class MagicSquare():
             total_num += 1
         return total_num
 
+    def heuristic(self):
+        return self.violation_number()
+
     def get_successors(self, succ_num):
         successors = []
         for _ in range(succ_num):

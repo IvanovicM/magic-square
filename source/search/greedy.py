@@ -13,16 +13,16 @@ class GreedySearch(Searcher):
         for it in range(iterations):
             succs = self.magic_square.get_successors(self.succ_num)
             best_succ = succs[0]
-            best_succ_viol_num = best_succ.violation_number()
+            best_succ_heuristic = best_succ.heuristic()
 
             for curr_succ in succs:
-                curr_succ_viol_num = curr_succ.violation_number()
-                if curr_succ_viol_num < best_succ_viol_num:
-                    best_succ_viol_num = curr_succ_viol_num
+                curr_succ_heuristic = curr_succ.heuristic()
+                if curr_succ_heuristic < best_succ_heuristic:
+                    best_succ_heuristic = curr_succ_heuristic
                     best_succ = curr_succ
 
             self.magic_square = best_succ
-            self.all_violations.append(best_succ_viol_num)
+            self.all_violations.append(best_succ.violation_number())
 
         self.sol = self.magic_square['matrix']
         self.violation_number = self.magic_square.violation_number()
