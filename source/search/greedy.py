@@ -22,7 +22,12 @@ class GreedySearch(Searcher):
                     best_succ = curr_succ
 
             self.magic_square = best_succ
-            self.all_violations.append(best_succ.violation_number())
+            new_violation_num = best_succ.violation_number()
+            self.all_violations.append(new_violation_num)
+
+            if new_violation_num == 0:
+                self.iter = it + 1
+                break
 
         self.sol = self.magic_square['matrix']
         self.violation_number = self.magic_square.violation_number()
