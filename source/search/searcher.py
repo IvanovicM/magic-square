@@ -24,6 +24,12 @@ class Searcher():
                     self.type, self.iter, self.violation_number, self.sol
         ))
 
+    def _init_start_state(self, iterations):
+        self.magic_square.init_random()
+        self.sol = self.magic_square['matrix']
+        self.violation_number = self.magic_square.violation_number()
+        self.iter = iterations
+
     def __getitem__(self, key):
         if key == 'sol':
             return self.sol

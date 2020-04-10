@@ -1,4 +1,5 @@
 import numpy as np
+import random
 
 from .bit2d import BinaryIndexedTree2D
 
@@ -8,7 +9,7 @@ class MagicSquare():
         self.n = n
         self.bit = BinaryIndexedTree2D(n, n)
         self.sum = int(n * (n**2 + 1) / 2)
-        self.init_random()
+        self.all_indeces = [[i,j] for i in range(n) for j in range(n)]
 
     def init_random(self):
         rm = np.random.permutation(self.n * self.n).reshape((self.n, self.n))
@@ -50,8 +51,22 @@ class MagicSquare():
         return total_num
 
     def get_successors(self, succ_num):
-        # TODO
-        return None
+        successors = []
+        for _ in range(succ_num):
+            ridx = random.sample(self.all_indeces, 2)
+            ridx_0 = ridx[0]
+            ridx_1 = ridx[1]
+
+            succ_mat = self.bit['matrix'].copy()
+            succ_mat[ridx_0[0]][ridx_0[1]], succ_mat[ridx_1[0]][ridx_1[1]] = (
+                succ_mat[ridx_1[0]][ridx_1[1]], succ_mat[ridx_0[0]][ridx_0[1]]
+            )
+
+            new_ms = MagicSquare(self.n)
+            new_ms.set_matrix(succ_mat)
+            successors.append(new_ms)
+
+        return successors
 
     def __getitem__(self, key):
         if key == 'n':
