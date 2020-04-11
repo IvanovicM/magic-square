@@ -11,14 +11,14 @@ class RandomSearch(Searcher):
 
         for _ in range(iterations - 1):
             self.magic_square.init_random()
-            new_violation_num = self.magic_square.violation_number()
+            new_violation_number = self.magic_square.violation_number()
 
-            if new_violation_num < self.violation_number:
+            if new_violation_number < self.violation_number:
                 self.sol = self.magic_square['matrix']
                 self.violation_number = new_violation_number
                 self.all_violations.append(new_violation_number)
             
-            if new_violation_num == 0:
+            if new_violation_number == 0:
                 self.iter = it + 1
                 break
         
