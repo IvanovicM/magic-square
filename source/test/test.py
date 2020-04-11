@@ -4,10 +4,8 @@ from ..search import annealing, beam, genetic, greedy, randoms
 if __name__ == '__main__':
     ms = MagicSquare(3)
 
-    rnd = randoms.RandomSearch(ms)
-    rnd.find(1000)
-    rnd.print_solution()
+    #fnd = randoms.RandomSearch(ms)
+    fnd = greedy.GreedySearch(ms)
 
-    #grd = greedy.GreedySearch(ms)
-    #grd.find(20)
-    #grd.print_solution()
+    fnd.find(100)
+    fnd.print_solution()
