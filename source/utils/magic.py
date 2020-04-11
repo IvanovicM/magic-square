@@ -1,27 +1,26 @@
 import numpy as np
 import random
 
-from .bit2d import BinaryIndexedTree2D
+from .heuristics import h1, h2
 
 class MagicSquare():
 
     def __init__(self, n):
         self.n = n
         self.sum_map = {}
-        self.matrix = np.zeros(shape=(n, n), dtype=int)
         self.sum = int(n * (n**2 + 1) / 2)
         self.all_indeces = [[i,j] for i in range(n) for j in range(n)]
         self.init_random()
 
     def init_random(self):
-        self.init_sum_map()
-
+        self._reset()
         rm = np.random.permutation(self.n * self.n).reshape((self.n, self.n))
         for i in range(self.n):
             for j in range(self.n):
                 self.set_value(i, j, rm[i][j] + 1)
 
-    def init_sum_map(self):
+    def _reset(self):
+        self.matrix = np.zeros(shape=(self.n, self.n), dtype=int)
         for i in range(self.n):
             self.sum_map['r{}'.format(i)] = 0
             self.sum_map['c{}'.format(i)] = 0
@@ -57,7 +56,7 @@ class MagicSquare():
         return total_num
 
     def heuristic(self):
-        return self.violation_number()
+        return h2(self)
 
     def succ_heuristic(self, succ_idx):
         self._swap_values(succ_idx)
@@ -92,4 +91,6 @@ class MagicSquare():
             return self.sum
         if key == 'matrix':
             return self.matrix
+        if key == 'sum_map':
+            return self.sum_map
         return None

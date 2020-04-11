@@ -12,5 +12,3 @@ def plot_violations_through_time(finder, iter_per_experiment=100):
     plt.xlabel('iterations')
     plt.ylabel('violations num')
     plt.show()
-    
-
