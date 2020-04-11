@@ -74,6 +74,8 @@ class MagicSquare():
         self.set_value(i1, j1, prev_value_0)
 
     def set_succ(self, succ_idx):
+        if succ_idx is None:
+            return
         self._swap_values(succ_idx)
 
     def get_succ_idx(self, succ_num):
