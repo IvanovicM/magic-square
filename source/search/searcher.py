@@ -39,6 +39,8 @@ class Searcher():
             return self.sol
         if key == 'viol num':
             return self.violation_number
+        if key == 'max viol num':
+            return self.max_violation_number
         if key == 'type':
             return self.type
         if key == 'iter':
