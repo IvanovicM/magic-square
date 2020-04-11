@@ -59,8 +59,23 @@ class MagicSquare():
     def heuristic(self):
         return self.violation_number()
 
-    def succ_heuristic(self):
-        pass
+    def succ_heuristic(self, succ_idx):
+        self._swap_values(succ_idx)
+        succ_heuristic = self.heuristic()
+        self._swap_values(succ_idx)
+        return succ_heuristic
+
+    def _swap_values(self, idxs):
+        [i0, j0] = idxs[0]
+        [i1, j1] = idxs[1]
+        prev_value_0 = self.matrix[i0, j0]
+        prev_value_1 = self.matrix[i1, j1]
+
+        self.set_value(i0, j0, prev_value_1)
+        self.set_value(i1, j1, prev_value_0)
+
+    def set_succ(self, succ_idx):
+        self._swap_values(succ_idx)
 
     def get_succ_idx(self, succ_num):
         succ_idx = []

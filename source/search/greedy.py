@@ -11,18 +11,22 @@ class GreedySearch(Searcher):
         super(GreedySearch, self)._init_start_state(iterations)
         
         for it in range(iterations):
-            succs = self.magic_square.get_successors(self.succ_num)
-            best_succ = succs[0]
-            best_succ_heuristic = best_succ.heuristic()
+            succ_idx = self.magic_square.get_succ_idx(self.succ_num)
+            best_succ_idx = succ_idx[0]
+            best_succ_heuristic = self.magic_square.succ_heuristic(succ_idx[0])
 
-            for curr_succ in succs:
-                curr_succ_heuristic = curr_succ.heuristic()
+            # Find the best
+            for curr_succ_idx in succ_idx:
+                curr_succ_heuristic = (
+                    self.magic_square.succ_heuristic(curr_succ_idx)
+                )
                 if curr_succ_heuristic < best_succ_heuristic:
                     best_succ_heuristic = curr_succ_heuristic
-                    best_succ = curr_succ
+                    best_succ_idx = curr_succ_idx
 
-            self.magic_square = best_succ
-            new_violation_num = best_succ.violation_number()
+            # Remember the best
+            self.magic_square.set_succ(best_succ_idx)
+            new_violation_num = self.magic_square.violation_number()
             self.all_violations.append(new_violation_num)
 
             if new_violation_num == 0:
