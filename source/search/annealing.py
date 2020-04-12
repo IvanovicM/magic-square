@@ -25,11 +25,7 @@ class SimulatedAnnealing(Searcher):
             )
 
             # Go to next
-            if deltaE > 0:
+            if deltaE > 0 or (deltaE <= 0 and uniform(0, 1) < exp(deltaE / T)):
                 self.magic_square.set_succ(random_succ_idx)
-            else:
-                if uniform(0, 1) < exp(deltaE / T):
-                    self.magic_square.set_succ(random_succ_idx)
-
             if self._should_break(it):
                 break
