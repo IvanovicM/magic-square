@@ -9,7 +9,7 @@ class RandomSearch(Searcher):
         self.succ_num = succ_num
 
     def find(self, iterations):
-        super(RandomSearch, self)._init_start_state(iterations)
+        self._init_start_state(iterations)
 
         for it in range(iterations):
             succ_idx = self.magic_square.get_succ_idx(self.succ_num)
@@ -18,11 +18,7 @@ class RandomSearch(Searcher):
 
             # Remember that randomly chosen
             self.magic_square.set_succ(next_succ_idx)
-            new_violation_num = self.magic_square.violation_number()
-            self.all_violations.append(new_violation_num)
-
-            if new_violation_num == 0:
-                self.iter = it + 1
+            if self._should_break(it):
                 break
 
         self.sol = self.magic_square['matrix']

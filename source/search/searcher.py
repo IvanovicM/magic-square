@@ -34,6 +34,14 @@ class Searcher():
         self.iter = iterations
         self.all_violations = [self.violation_number]
 
+    def _should_break(self, curr_it):
+        new_violation_num = self.magic_square.violation_number()
+        self.all_violations.append(new_violation_num)
+        if new_violation_num == 0:
+            self.iter = curr_it + 1
+            return True
+        return False
+
     def __getitem__(self, key):
         if key == 'sol':
             return self.sol
