@@ -6,8 +6,6 @@ class Searcher():
 
     def __init__(self, magic_square, succ_num):
         self.magic_square = magic_square
-        self.sol = None
-        self.violation_number = None
         self.max_violation_number = (self.magic_square['n'] + 1) * 2
         self.iter = None
         self.all_violations = None
@@ -17,23 +15,21 @@ class Searcher():
         pass
 
     def print_solution(self):
-        if self.sol is None:
+        if self.magic_square is None:
             return
         print('============================================================\n'
               'Search type: {}\n'
               'iterations: {}\n'
               'violation number: {} of {}\n'
               'solution: \n{}'.format(
-                    self.type, self.iter, self.violation_number,
-                    self.max_violation_number, self.sol
+                    self.type, self.iter, self['viol num'],
+                    self.max_violation_number, self['sol']
         ))
 
     def _init_start_state(self, iterations):
         self.magic_square.init_random()
-        self.sol = self.magic_square['matrix']
-        self.violation_number = self.magic_square.violation_number()
         self.iter = iterations
-        self.all_violations = [self.violation_number]
+        self.all_violations = [self['viol num']]
 
     def _should_break(self, curr_it):
         new_violation_num = self.magic_square.violation_number()
@@ -45,9 +41,9 @@ class Searcher():
 
     def __getitem__(self, key):
         if key == 'sol':
-            return self.sol
+            return self.magic_square['matrix']
         if key == 'viol num':
-            return self.violation_number
+            return self.magic_square.violation_number()
         if key == 'max viol num':
             return self.max_violation_number
         if key == 'type':

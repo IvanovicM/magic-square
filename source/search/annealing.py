@@ -33,6 +33,3 @@ class SimulatedAnnealing(Searcher):
 
             if self._should_break(it):
                 break
-
-        self.sol = self.magic_square['matrix']
-        self.violation_number = self.magic_square.violation_number()
