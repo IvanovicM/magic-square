@@ -18,7 +18,7 @@ class SimulatedAnnealing(Searcher):
             random_succ_idx = succ_idx[randint(0, self.succ_num - 1)]
 
             # Calculate sim. annealing values
-            T = (it + 1) / iterations
+            T = 1 - it / iterations
             deltaE = (
                 self.magic_square.heuristic()
                 - self.magic_square.succ_heuristic(random_succ_idx)

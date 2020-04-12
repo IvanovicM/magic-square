@@ -6,8 +6,8 @@ if __name__ == '__main__':
 
     #finder = randoms.RandomSearch(ms)
     #finder = greedy.GreedySearch(ms)
-    #finder = annealing.SimulatedAnnealing(ms)
-    finder = beam.LocalBeamSearch(ms)
+    finder = annealing.SimulatedAnnealing(ms)
+    #finder = beam.LocalBeamSearch(ms)
 
     finder.find(100)
     finder.print_solution()
