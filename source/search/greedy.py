@@ -3,9 +3,8 @@ from .searcher import Searcher
 class GreedySearch(Searcher):
 
     def __init__(self, magic_square, succ_num=30):
-        super(GreedySearch, self).__init__(magic_square)
+        super(GreedySearch, self).__init__(magic_square, succ_num)
         self.type = 'Greedy Search'
-        self.succ_num = succ_num
 
     def find(self, iterations):
         self._init_start_state(iterations)

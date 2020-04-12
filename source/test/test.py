@@ -6,6 +6,7 @@ if __name__ == '__main__':
 
     #finder = randoms.RandomSearch(ms)
     finder = greedy.GreedySearch(ms)
+    #finder = annealing.SimulatedAnnealing(ms)
 
-    finder.find(10000)
+    finder.find(100)
     finder.print_solution()

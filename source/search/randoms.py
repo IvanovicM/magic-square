@@ -4,9 +4,8 @@ from .searcher import Searcher
 class RandomSearch(Searcher):
 
     def __init__(self, magic_square, succ_num=30):
-        super(RandomSearch, self).__init__(magic_square)
+        super(RandomSearch, self).__init__(magic_square, succ_num)
         self.type = 'Random Search'
-        self.succ_num = succ_num
 
     def find(self, iterations):
         self._init_start_state(iterations)

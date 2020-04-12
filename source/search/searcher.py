@@ -4,13 +4,14 @@ from ..utils.magic import MagicSquare
 
 class Searcher():
 
-    def __init__(self, magic_square):
+    def __init__(self, magic_square, succ_num):
         self.magic_square = magic_square
         self.sol = None
         self.violation_number = None
         self.max_violation_number = (self.magic_square['n'] + 1) * 2
         self.iter = None
         self.all_violations = None
+        self.succ_num = succ_num
 
     def find(self, iterations):
         pass
