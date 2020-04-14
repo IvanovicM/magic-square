@@ -7,10 +7,11 @@ if __name__ == '__main__':
 
     #finder = randoms.RandomSearch(ms)
     #finder = greedy.GreedySearch(ms)
-    finder = annealing.SimulatedAnnealing(ms)
-    #finder = beam.LocalBeamSearch(ms)
+    #finder = annealing.SimulatedAnnealing(ms)
+    finder = beam.LocalBeamSearch(ms)
     
     #statsplot.plot_violations_through_time(finder)
-    statsplot.plot_simulated_annealing_params(finder)
+    #statsplot.plot_simulated_annealing_params(finder)
+    statsplot.plot_beam_finder_params(finder)
 
     

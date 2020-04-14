@@ -9,6 +9,7 @@ class LocalBeamSearch(Searcher):
         super(LocalBeamSearch, self).__init__(magic_square, succ_num)
         self.type = 'Local Beam Search'
         self.beam_num = beam_num
+        self.mean_violations = None
 
     def find(self, iterations):
         self._init_start_state(iterations)
@@ -47,22 +48,36 @@ class LocalBeamSearch(Searcher):
 
     def _set_best_magic_square(self):
         self.magic_square = None
+        total_violation_sum = 0
+
         for ms in self.magic_squares:
             if self.magic_square is None or (
                 ms.violation_number() < self.magic_square.violation_number()
             ):
                 self.magic_square = ms
+            total_violation_sum += ms.violation_number()
+        
+        self.mean_violations.append(total_violation_sum / self.beam_num)
 
     def _init_start_state(self, iterations):
         self.magic_squares = []
         self.n = self.magic_square['n']
         self.magic_square = None
+        self.mean_violations = []
+        total_violation_sum = 0
 
         for _ in range(self.beam_num):
             ms = MagicSquare(self.n)
             ms.init_random()
             self.magic_squares.append(ms)
 
+            total_violation_sum += ms.violation_number()
+
         self._set_best_magic_square()
         self.iter = iterations
         self.all_violations = [self['viol num']]
+
+    def __getitem__(self, key):
+        if key == 'mean viol. through iter.':
+            return self.mean_violations
+        return super(LocalBeamSearch, self).__getitem__(key) 
