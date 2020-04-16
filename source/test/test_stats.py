@@ -21,10 +21,19 @@ def print_stats(finder):
 if __name__ == '__main__':
     ms = MagicSquare(5)
 
-    finder = randoms.RandomSearch(ms)
-    print_stats(finder)
+#     finder = randoms.RandomSearch(ms)
+#     print_stats(finder)
 
-    finder = greedy.GreedySearch(ms)
+#     finder = greedy.GreedySearch(ms)
+#     print_stats(finder)
+
+#     finder = annealing.SimulatedAnnealing(ms)
+#     print_stats(finder)
+
+#     finder = beam.LocalBeamSearch(ms)
+#     print_stats(finder)
+
+    finder = genetic.GeneticAlgorithm(ms)
     print_stats(finder)
 
     
