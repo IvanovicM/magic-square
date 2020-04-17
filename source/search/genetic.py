@@ -81,7 +81,7 @@ class GeneticAlgorithm(Searcher):
         total_fitness = 0
 
         for i in range(self.population_size):
-            fitness = self._fitness(self.population[i])
+            fitness = self['max viol num'] - self._fitness(self.population[i])
             self.parent_probabilities[i] = fitness
             total_fitness += fitness
         self.parent_probabilities = [
