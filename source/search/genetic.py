@@ -1,5 +1,6 @@
 import numpy as np
 
+from random import random
 from .searcher import Searcher
 from ..utils.magic import MagicSquare
 
@@ -13,7 +14,31 @@ class GeneticAlgorithm(Searcher):
 
     def find(self, iterations):
         self._init_start_state(iterations)
-        # TODO 
+        # TODO
+
+    def _crossover(self, parent_a, parent_b):
+        parent_a = parent_a['matrix'].reshape((1, -1))[0]
+        parent_b = parent_b['matrix'].reshape((1, -1))[0]
+        parent_a_part = []
+        parent_b_part = []
+
+        gene_a = int(random() * len(parent_a))
+        gene_b = int(random() * len(parent_a))
+        start_gene = min(gene_a, gene_b)
+        end_gene = max(gene_a, gene_b)
+
+        for i in range(start_gene, end_gene):
+            parent_a_part.append(parent_a[i])
+        parent_b_part = [x for x in parent_b if x not in parent_a_part]
+
+        child = parent_a_part + parent_b_part
+        child = np.reshape(child, (self.magic_square['n'], -1))
+        child_ms = MagicSquare(self.magic_square['n'])
+        child_ms.set_matrix(child)
+        return child_ms
+
+    def _fitness(self, x):
+        return x.violation_number()
 
     def _init_start_state(self, iterations):
         self.population = []
