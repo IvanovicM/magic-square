@@ -14,34 +14,38 @@ class GeneticAlgorithm(Searcher):
         self.elite_size = int(0.2 * population_size)
         self.mutation_rate = 0.1
         self.mean_violations = None
+        self.parent_probabilities = []
 
     def find(self, iterations):
         self._init_start_state(iterations)
+        self._set_parent_probabilities()
 
         for it in range(iterations):
             new_population = self._get_elite()
             for _ in range(self.population_size - self.elite_size):
-                parent_a, parent_b = self._chose_parents()
+                parent_a, parent_b = self._choose_parents()
                 child = self._crossover(parent_a, parent_a)
                 child = self._mutate(child)
                 new_population.append(child)
             self.population = new_population
+            self._set_parent_probabilities()
 
             self._set_best_magic_square()
             if self._should_break(it):
                 break
 
     def _get_elite(self):
-        sorted(self.population, key=self._fitness)
         new_population = []
         
         for individual in self.population[0 : self.elite_size]:
             new_population.append(individual)
         return new_population
 
-    def _chose_parents(self):
-        # TODO: by probability
-        return self.population[0], self.population[1]
+    def _choose_parents(self):
+        parents_idx = np.random.choice(
+            self.population_size, 2, p=self.parent_probabilities
+        )
+        return self.population[parents_idx[0]], self.population[parents_idx[1]]
 
     def _crossover(self, parent_a, parent_b):
         parent_a = parent_a['matrix'].reshape((1, -1))[0]
@@ -70,6 +74,19 @@ class GeneticAlgorithm(Searcher):
             idx_to_swap = individual.get_succ_idx(1)
             mutated_individual.set_succ(idx_to_swap[0])
         return mutated_individual
+
+    def _set_parent_probabilities(self):
+        sorted(self.population, key=self._fitness)
+        self.parent_probabilities = np.zeros(self.population_size)
+        total_fitness = 0
+
+        for i in range(self.population_size):
+            fitness = self._fitness(self.population[i])
+            self.parent_probabilities[i] = fitness
+            total_fitness += fitness
+        self.parent_probabilities = [
+            prob / total_fitness for prob in self.parent_probabilities
+        ]
 
     def _fitness(self, x):
         return x.violation_number()
