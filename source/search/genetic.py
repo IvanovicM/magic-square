@@ -12,7 +12,7 @@ class GeneticAlgorithm(Searcher):
         self.type = 'Genetic Algorithm'
         self.population_size = population_size
         self.elite_size = int(0.2 * population_size)
-        self.mutation_rate = 0.1
+        self.mutation_rate = 0.5
         self.mean_violations = None
         self.parent_probabilities = []
 
@@ -28,15 +28,14 @@ class GeneticAlgorithm(Searcher):
                 child = self._mutate(child)
                 new_population.append(child)
             self.population = new_population
-            self._set_parent_probabilities()
 
+            self._set_parent_probabilities()
             self._set_best_magic_square()
             if self._should_break(it):
                 break
 
     def _get_elite(self):
         new_population = []
-        
         for individual in self.population[0 : self.elite_size]:
             new_population.append(individual)
         return new_population
@@ -53,10 +52,8 @@ class GeneticAlgorithm(Searcher):
         parent_a_part = []
         parent_b_part = []
 
-        gene_a = int(random.random() * len(parent_a))
-        gene_b = int(random.random() * len(parent_a))
-        start_gene = min(gene_a, gene_b)
-        end_gene = max(gene_a, gene_b)
+        start_gene = 0
+        end_gene = int(len(parent_a) / 2)
 
         for i in range(start_gene, end_gene):
             parent_a_part.append(parent_a[i])
@@ -88,8 +85,8 @@ class GeneticAlgorithm(Searcher):
             prob / total_fitness for prob in self.parent_probabilities
         ]
 
-    def _fitness(self, x):
-        return x.violation_number()
+    def _fitness(self, individual):
+        return individual.violation_number()
 
     def _init_start_state(self, iterations):
         self.population = []
