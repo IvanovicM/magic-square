@@ -4,15 +4,21 @@ from ..stats import statsplot
 
 if __name__ == '__main__':
     ms = MagicSquare(5)
-
-    #finder = randoms.RandomSearch(ms)
-    #finder = greedy.GreedySearch(ms)
-    #finder = annealing.SimulatedAnnealing(ms)
-    #finder = beam.LocalBeamSearch(ms)
-    finder = genetic.GeneticAlgorithm(ms)
+    finders = [
+        randoms.RandomSearch(ms),
+        greedy.GreedySearch(ms),
+        annealing.SimulatedAnnealing(ms),
+        beam.LocalBeamSearch(ms),
+        genetic.GeneticAlgorithm(ms)
+    ]
     
-    #statsplot.plot_violations_through_time(finder)
-    #statsplot.plot_simulated_annealing_params(finder)
-    statsplot.plot_beam_finder_params(finder)
+    # General stats plot
+    for finder in finders:
+        statsplot.plot_violations_through_time(finder)
+
+    # Sim. ann. and beam stats plot
+    statsplot.plot_simulated_annealing_params(finders[2])
+    statsplot.plot_beam_finder_params(finders[3])
+    statsplot.plot_beam_finder_params(finders[4])
 
     
