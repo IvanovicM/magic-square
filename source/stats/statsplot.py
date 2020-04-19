@@ -18,17 +18,17 @@ def plot_simulated_annealing_params(finder, iter_per_experiment=100):
     plt.suptitle(finder['type'])
 
     ax1 = plt.subplot(311)
-    plt.plot(finder['T'], label='T', color='green')
+    plt.plot(finder['T'], label='T', color='g')
     plt.setp(ax1.get_xticklabels(), visible=False)
     plt.legend()
 
     ax2 = plt.subplot(312, sharex=ax1)
-    plt.plot(finder['prob'], label='probability', color='blue')
+    plt.plot(finder['prob'], label='probability', color='b', marker='.')
     plt.setp(ax2.get_xticklabels(), visible=False)
     plt.legend()
 
     ax3 = plt.subplot(313, sharex=ax1)
-    plt.plot(finder['viol. through iter.'], label='violations', color='red')
+    plt.plot(finder['viol. through iter.'], label='violations', color='r')
     plt.legend()
 
     plt.show()

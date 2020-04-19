@@ -12,7 +12,10 @@ class SimulatedAnnealing(Searcher):
 
     def find(self, iterations):
         self._init_start_state(iterations)
-        self.T = [i/iterations for i in range(iterations, 0, -1)]
+        self.T = [
+            i / (iterations * self.magic_square['n'] / 2)
+            for i in range(iterations, 0, -1)
+        ]
         self.prob = zeros(shape=(iterations, 1))
         
         for it in range(iterations):
