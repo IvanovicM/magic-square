@@ -3,7 +3,7 @@ from ..search import annealing, beam, genetic, greedy, randoms
 from ..stats import statsplot
 
 if __name__ == '__main__':
-    ms = MagicSquare(5)
+    ms = MagicSquare(3)
     finders = [
         randoms.RandomSearch(ms),
         greedy.GreedySearch(ms),
