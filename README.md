@@ -1,19 +1,17 @@
-# Magic Square
+# Magic Square: AI approach
 Multiple AI algorithms which solve [Magic Square](https://en.wikipedia.org/wiki/Magic_square).
 
-# What is Magic Square?
+## What algorithms can I find here?
 
-# What algorithms can I find here?
+### Greedy Search
 
-## Greedy Search
+### Simulated Annealing
 
-## Simulated Annealing
+### Local Beam Search
 
-## Local Beam Search
+### Genetic Algorithm
 
-## Genetic Algorithm
-
-# How to run these algorithms?
+## How to run these algorithms?
 
 To run test script simply type the following command from the root directory in a terminal:
 
@@ -21,7 +19,7 @@ To run test script simply type the following command from the root directory in 
   python -m source.test.test
 ```
 
-If you want to see statistics for the methods, simply type the following command from the root directory in a terminal:
+If you want to see statistics for the methods, simply type the following command(s) from the root directory in a terminal:
 
 ```shell
   python -m source.test.test_stats
